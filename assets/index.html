@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JavaScript</title>
+    <title>JavaScript Quiz</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
@@ -13,14 +13,37 @@
             <a href="">Highscores</a>
         </div>
         <div class="timer">
-            Time:
+            Time: <span id="time">0</span>
         </div>
     </header>
     <main class="wrapper">
         <div id="home-screen" class="home">
             <h1>JavaScript Quiz</h2>
-            <p class="rules">You have SIXTY SECONDS to answer 10 questions. For every WRONG answer TWO SECONDS will be SUBTRACTED from your current time. Your SCORE will be the TIME LEFT when all questions are answered, if you do not complete the quiz in time you will recieve a score of 0.</p>
-            <button class= "start">Start</button>
+            <p class="rules">
+                You have NINETY SECONDS to answer 10 questions. For every WRONG answer TWO SECONDS will be SUBTRACTED from your current time. Your SCORE will be the TIME LEFT when all questions are answered, if you do not complete the quiz in time you will recieve a score of 0.
+            </p>
+
+            <button id="start" class= "start-btn">Start</button>
+        </div>
+
+        <div id="questions-answers" class="hidden">
+            <h2 id="question"></h2>
+            <div id="answers" class="answers">
+                <button class="btn"></button>
+                <button class="btn"></button>
+                <button class="btn"></button>
+                <button class="btn"></button>
+            </div>
+        </div>
+
+        <div id="quiz-end" class="hidden">
+            <h2>You've Finished</h2>
+            <p>Your score is <span id="score"></span></p>
+            <p>
+                Enter your initials: <input type="text" id="initials" max="2"/>
+                <button id="submit">Submit</button>
+            </p>
+        </div>
     </main>
     
     <script src="./js/script.js"></script>
