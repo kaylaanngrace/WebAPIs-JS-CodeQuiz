@@ -4,7 +4,7 @@ var questionsAnwersEl = document.querySelector("#questions-answers");
 var answersEl = document.querySelector("#answers");
 var endQuizEl = document.querySelector("#quiz-end");
 var correctIncorrectEl = document.querySelector("#correctIncorrect");
-var initialsEl = document.querySelector("#initals");
+var initialsEl = document.querySelector("#initials");
 var scoreEl = document.querySelector("#score")
 var highscoresPageEl = document.querySelector("#highscoresPage")
 var submitButton = document.querySelector("#submit")
@@ -185,12 +185,10 @@ function selectAnswers(){
         timeLeft -= 5
    // correct or Incorrect styling and text
         correctIncorrectEl.textContent = "Incorrect!";
-        correctIncorrectEl.style.color = "red";
-        correctIncorrectEl.style.fontSize = "32px";
+        correctIncorrectEl.setAttribute("style", "color: red; font-size: 32px;")
     } else {
         correctIncorrectEl.textContent = "Correct!";
-        correctIncorrectEl.style.color = "#42f042";
-        correctIncorrectEl.style.fontSize = "32px";
+        correctIncorrectEl.setAttribute("style", "color:#42f042; font-size: 32px;")
     }
 
     // display correct or incorrect
@@ -224,29 +222,29 @@ function endQuiz(){
     // hide questions and display score and submit button 
     questionsAnwersEl.setAttribute("class","hidden");
     endQuizEl.removeAttribute("class", "hidden");
-    submitButton.addEventListener("click", saveScores)
-
+    submitButton.addEventListener("click", saveScores);
     
 };
 
 // save scores to localStoarge
 function saveScores() {
-    var initials = initialsEl.value.trim();
+    var initials = initialsEl.values
 
     if (initials !== "") {
       var previousScores =
-        JSON.parse(window.localStorage.getItem("highscores")) || [];
+        JSON.parse(window.localStorage.getItem("scoresUl")) || [];
   
       var currentScore = {
-        score: time,
-        initials: initials
+        score: timeLeft,
+        initials: initialsEl.value
       };
   
       // save to localstorage
       previousScores.push(currentScore);
-      window.localStorage.setItem("highscores", JSON.stringify(previousScores));
+      window.localStorage.setItem("scoresUl", JSON.stringify(previousScores));
   
       highscoresPage();
+      ;
     }
 }
 
@@ -263,7 +261,17 @@ function highscoresPage () {
     //display highscores page
     highscoresPageEl.removeAttribute("class", "hidden");
     // pull from localStorage
-    var scoresList = JSON.parse(window.localStorage.getItem("highscores")) || [];
+    var scoresList = JSON.parse(window.localStorage.getItem("scoresUl")) || [];
+
+    scoresList.forEach(function(score){
+        var liEl = document.createElement("li");
+        liEl.textContent = score.initials + " : " + score.score;
+
+        liEl.setAttribute("style", "background-color:rgba(61, 196, 184, 1); padding: 5px; list-style-type: none; color: #18534e; border: black 2px solid;")
+
+        var scoresUl = document.querySelector("#scoresUl");
+        scoresUl.appendChild(liEl);
+    })
     // homepage return button
     var homeButton = document.querySelector(".home")
     homeButton.addEventListener("click",home)
@@ -276,5 +284,7 @@ function home() {
     var startEl = document.getElementById("start-home");
     startEl.removeAttribute("class","hidden");
 
+    // reload page so that the highscores don't repeat
+    location.reload()
 }
 
