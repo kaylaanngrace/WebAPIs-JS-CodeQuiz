@@ -231,7 +231,23 @@ function endQuiz(){
 
 // save scores to localStoarge
 function saveScores() {
+    var initials = initialsEl.value.trim();
 
+    if (initials !== "") {
+      var previousScores =
+        JSON.parse(window.localStorage.getItem("highscores")) || [];
+  
+      var currentScore = {
+        score: time,
+        initials: initials
+      };
+  
+      // save to localstorage
+      previousScores.push(currentScore);
+      window.localStorage.setItem("highscores", JSON.stringify(previousScores));
+  
+      highscoresPage();
+    }
 }
 
 // event listener for highscores element
@@ -247,8 +263,7 @@ function highscoresPage () {
     //display highscores page
     highscoresPageEl.removeAttribute("class", "hidden");
     // pull from localStorage
-
-
+    var scoresList = JSON.parse(window.localStorage.getItem("highscores")) || [];
     // homepage return button
     var homeButton = document.querySelector(".home")
     homeButton.addEventListener("click",home)

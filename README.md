@@ -19,6 +19,10 @@ You can return home from the highscore page by clicking the button in the top mi
 ## CREDITS 
 setTimeout() - https://developer.mozilla.org/en-US/docs/Web/API/setTimeout
 setInterval/clear interval - in class activity with the UofMN coding bootcamp.
-forEach () - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
+forEach() - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
+strictly inequality (!==) - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_inequality
+(!=) vs (!==) - https://www.geeksforgeeks.org/difference-between-and-operator-in-javascript-2/#:~:text=%3D%3D) and https://stackoverflow.com/questions/42517721/difference-between-and
+grab empty array - https://stackoverflow.com/questions/41828883/what-does-a-a-mean
+.push() - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push
 ## CONTRIBUTIONS  
 MADE WITH 💜 BY MAKAYLA WILSON
