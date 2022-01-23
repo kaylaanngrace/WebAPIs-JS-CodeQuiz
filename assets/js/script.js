@@ -5,7 +5,9 @@ var answersEl = document.querySelector("#answers");
 var endQuizEl = document.querySelector("#quiz-end");
 var correctIncorrectEl = document.querySelector("#correctIncorrect");
 var initialsEl = document.querySelector("#initals");
-
+var scoreEl = document.querySelector("#score")
+var highscoresEl = document.querySelector("#highscore")
+var submitButton = document.querySelector("#submit")
 var questions = [
     {
         question: "Where is the best place to insert a JavaScript?",
@@ -116,37 +118,44 @@ var questions = [
     }
 ]
 
+var timeLeft = 10;
+var timeInterval = setInterval(function () {
+    if (timeLeft > 1) {
+    timerEl.innerHTML = timeLeft;
+    timeLeft--;
+    } else {
+    timerEl.innerHTML = '';
+    clearInterval(timeInterval);
+    endQuiz();
+    }
+}, 1000);
 
-var countdown = function () {
-    var timeLeft = 90;
-    var timeInterval = setInterval(function () {
-      if (timeLeft > 1) {
-        timerEl.innerHTML = timeLeft;
-        timeLeft--;
-      } else {
-        timerEl.innerHTML = '';
-        clearInterval(timeInterval);
-        endQuiz();
-      }
-    }, 1000);
-};
-
+// start button event listner
 startButton.addEventListener('click', startQuiz)
+
+// start quiz function
 function startQuiz(){
     var startEl = document.getElementById("start-home");
+    // hide start page
     startEl.setAttribute("class","hidden");
     currentQuestionIndex = 0;
+    // display questions section
     questionsAnwersEl.removeAttribute("class", "hidden");
 
-    countdown();
+    // call timer
+    timeInterval
+    // call questions
     viewQuestions();
 };
 
+// question function to view questions
 function viewQuestions(){
     var currentQuestion = questions[currentQuestionIndex];
 
     var questionEl = document.getElementById("question");
     questionEl.textContent = currentQuestion.question;
+
+    // clear previous answers
     answersEl.innerHTML = "";
 
     currentQuestion.answers.forEach(function(answer, i) {
@@ -154,21 +163,21 @@ function viewQuestions(){
         var selectAnswer = document.createElement("button");
         selectAnswer.setAttribute("class", "btn");
         selectAnswer.setAttribute("value", answer);
-    
+        
+        // display answers
         selectAnswer.textContent = answer;
     
         selectAnswer.addEventListener("click", selectAnswers)
 
-        answersEl.appendChild(selectAnswer);
-        
+        answersEl.appendChild(selectAnswer)    
     });
 
 };
 
+// display answers
 function selectAnswers(){
-    if (this !== questions[currentQuestionIndex].correct) {
-
-   // correct or Incorrect 
+    if (this !==questions[currentQuestionIndex].correct) {
+   // correct or Incorrect styling and text
     correctIncorrectEl.textContent = "Incorrect!";
     correctIncorrectEl.style.color = "red";
     correctIncorrectEl.style.fontSize = "32px";
@@ -178,12 +187,13 @@ function selectAnswers(){
     correctIncorrectEl.style.fontSize = "32px";
     }
 
+    // display correct or incorrect
     correctIncorrectEl.setAttribute("class", "correctIncorrect");
     setTimeout(function() {
     correctIncorrectEl.setAttribute("class", "correctIncorrect hidden");
     }, 1000);
 
-    // next question
+    // go to next question
     currentQuestionIndex++;
 
     if (currentQuestionIndex === questions.length) {
@@ -194,11 +204,29 @@ function selectAnswers(){
 };
 
 function endQuiz(){
-    questionsAnwersEl.setAttribute("class", "hidden");
+    clearInterval(timeInterval)
+    questionsAnwersEl.setAttribute("class","hidden");
     endQuizEl.removeAttribute("class", "hidden");
-    saveScores();
+    submitButton.addEventListener("click", saveScores)
+    
 };
 
 function saveScores() {
+    var initials = initialsEl;
 
+    if (initials !== "") {
+        // grab from localStorage
+        var highscores =
+        JSON.parse(window.localStorage.getItem("highscores")) || [];
+
+        // new score
+        var newScore = {
+        score: timeInterval,
+        initials: initials
+        };
+
+        // save to localstorage
+        highscores.push(newScore);
+        window.localStorage.setItem("highscores", JSON.stringify(highscores))
+    }
 };
