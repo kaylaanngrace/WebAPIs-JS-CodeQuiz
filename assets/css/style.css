@@ -37,7 +37,7 @@ header {
     padding-top: 50px;  
 }
 
-.start, .questions-answers, .endQuiz {
+.start, .endQuiz {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -55,19 +55,16 @@ header {
     background-color: var(--secondary-color);
 }
 
+.questions-answers {
+    display: flex;
+    flex-direction: column;   
+}
+
 .answers {
     display: flex;
     flex-direction: column;
-    
 }
 
-.btn.incorrect {
-    background-color: red;
-}
-
-.btn.correct {
-    background-color: rgb(67, 223, 67);
-}
 
 .hidden {
     display: none;

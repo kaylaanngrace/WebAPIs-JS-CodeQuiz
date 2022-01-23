@@ -151,42 +151,19 @@ function viewQuestions(){
         // create buttons for answers
         var selectAnswer = document.createElement("button");
         selectAnswer.setAttribute("class", "btn");
-        selectAnswer.setAttribute("value", answer);
+        selectAnswer.setAttribute("value", answers);
     
-        selectAnswer.textContent = i + 1 + ". " + answer;
+        selectAnswer.textContent = answer;
     
-        selectAnswer.onclick = selectAnswers;
+        selectAnswer.addEventListener("click", selectAnswers)
 
         answersEl.appendChild(selectAnswer);
+        
     });
 
 };
 
 function selectAnswers(){
-    if (this.value !== questions[currentQuestionIndex].correct) {
-        // penalize time
-        time -= 2;
-        btn.addClass("incorrect")
-    
-        if (time < 0) {
-          time = 0;
-        }
-        // display new time
-        timerEl.textContent = time;
-        btn.addClass("correct")
-      } else {
-
-      }
-    
-      // next question
-      currentQuestionIndex++;
-    
-      // time checker
-      if (currentQuestionIndex === questions.length) {
-        endQuiz();
-      } else {
-        viewQuestions();
-      }
 };
 
 function endQuiz(){
