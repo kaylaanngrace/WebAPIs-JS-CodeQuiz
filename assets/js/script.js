@@ -1,8 +1,10 @@
-var startButton = document.querySelector("#startBtn")
-var timerEl = document.querySelector("#timer")
-var questionsAnwersEl = document.querySelector("#questions-answers")
-var answersEl = document.querySelector("#answers")
-var endQuizEl = document.querySelector("#quiz-end")
+var startButton = document.querySelector("#startBtn");
+var timerEl = document.querySelector("#timer");
+var questionsAnwersEl = document.querySelector("#questions-answers");
+var answersEl = document.querySelector("#answers");
+var endQuizEl = document.querySelector("#quiz-end");
+var correctIncorrectEl = document.querySelector("#correctIncorrect");
+var initialsEl = document.querySelector("#initals");
 
 var questions = [
     {
@@ -116,7 +118,7 @@ var questions = [
 
 
 var countdown = function () {
-    var timeLeft = 10;
+    var timeLeft = 90;
     var timeInterval = setInterval(function () {
       if (timeLeft > 1) {
         timerEl.innerHTML = timeLeft;
@@ -151,7 +153,7 @@ function viewQuestions(){
         // create buttons for answers
         var selectAnswer = document.createElement("button");
         selectAnswer.setAttribute("class", "btn");
-        selectAnswer.setAttribute("value", answers);
+        selectAnswer.setAttribute("value", answer);
     
         selectAnswer.textContent = answer;
     
@@ -164,14 +166,37 @@ function viewQuestions(){
 };
 
 function selectAnswers(){
+    if (this !== questions[currentQuestionIndex].correct) {
+
+   // correct or Incorrect 
+    correctIncorrectEl.textContent = "Incorrect!";
+    correctIncorrectEl.style.color = "red";
+    correctIncorrectEl.style.fontSize = "32px";
+    } else {
+    correctIncorrectEl.textContent = "Correct!";
+    correctIncorrectEl.style.color = "#42f042";
+    correctIncorrectEl.style.fontSize = "32px";
+    }
+
+    correctIncorrectEl.setAttribute("class", "correctIncorrect");
+    setTimeout(function() {
+    correctIncorrectEl.setAttribute("class", "correctIncorrect hidden");
+    }, 1000);
+
+    // next question
+    currentQuestionIndex++;
+
+    if (currentQuestionIndex === questions.length) {
+    endQuiz();
+    } else {
+    viewQuestions();
+    }
 };
 
 function endQuiz(){
     questionsAnwersEl.setAttribute("class", "hidden");
     endQuizEl.removeAttribute("class", "hidden");
     saveScores();
-
-
 };
 
 function saveScores() {

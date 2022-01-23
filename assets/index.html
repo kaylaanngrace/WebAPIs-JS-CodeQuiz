@@ -20,7 +20,7 @@
         <div id="start-home" class="start">
             <h1>JavaScript Quiz</h2>
             <p class="rules">
-                You have NINETY SECONDS to answer 10 questions. For every WRONG answer TWO SECONDS will be SUBTRACTED from your current time. Your SCORE will be the TIME LEFT when all questions are answered, if you do not complete the quiz in time you will recieve a score of 0.
+                You have NINETY SECONDS to answer 10 questions. For every WRONG answer FIVE SECONDS will be SUBTRACTED from your current time. Your SCORE will be the TIME LEFT when all questions are answered, if you do not complete the quiz in time you will recieve a score of 0.
             </p>
 
             <button id="startBtn" class= "start-btn">Start</button>
@@ -32,8 +32,11 @@
             </div>
         </div>
 
+        <div id="correctIncorrect" class="correctIncorrect hidden">
+        </div>
+
         <div id="quiz-end" class="endQuiz hidden">
-            <h2>You've Finished</h2>
+            <h2>You've Finished!</h2>
             <p>Your score is <span id="score"></span></p>
             <p>
                 Enter your initials: <input type="text" id="initials" max="2"/>
