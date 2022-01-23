@@ -8,6 +8,8 @@ var initialsEl = document.querySelector("#initals");
 var scoreEl = document.querySelector("#score")
 var highscoresPageEl = document.querySelector("#highscoresPage")
 var submitButton = document.querySelector("#submit")
+
+// questions and answers array
 var questions = [
     {
         question: "Where is the best place to insert a JavaScript?",
@@ -168,7 +170,8 @@ function viewQuestions(){
         
         // display answers
         selectAnswer.textContent = answer;
-    
+        
+        // event listener for answer click to move on to next question.
         selectAnswer.addEventListener("click", selectAnswers)
 
         answersEl.appendChild(selectAnswer)    
@@ -199,6 +202,7 @@ function selectAnswers(){
     // go to next question
     currentQuestionIndex++;
 
+    // end quiz when questions reach the end of the array. 
     if (currentQuestionIndex === questions.length) {
     endQuiz();
     } else {
@@ -217,6 +221,7 @@ function endQuiz(){
     } else {
         scoreEl.textContent = 0
     }
+    // hide questions and display score and submit button 
     questionsAnwersEl.setAttribute("class","hidden");
     endQuizEl.removeAttribute("class", "hidden");
     submitButton.addEventListener("click", saveScores)
@@ -232,6 +237,7 @@ function saveScores() {
 // event listener for highscores element
 highscoreButton.addEventListener("click", highscoresPage)
 
+// highscore page function
 function highscoresPage () {
     var startEl = document.getElementById("start-home");
     // hide start, questions and end pages
@@ -248,6 +254,7 @@ function highscoresPage () {
     homeButton.addEventListener("click",home)
 };
 
+// home page function
 function home() {
     highscoresPageEl.setAttribute("class","hidden")
     // ^hide highscore and display homepage

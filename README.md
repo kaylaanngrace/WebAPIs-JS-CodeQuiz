@@ -1,5 +1,5 @@
 # WebAPIs-JS-CodeQuiz
-
+https://kaylaanngrace.github.io/WebAPIs-JS-CodeQuiz/
 ## DESCRIPTION
 My motive for this project is to become better at using javascript and webAPIs to develop code. Also in the future I can edit questions for practice tests on other topics. 
 ## LEARNED/LEARNING
@@ -9,12 +9,16 @@ The first thing I did was create my HTML, CSS and JS files. Then I git init to c
 ## USAGE
 You have NINETY SECONDS to answer 10 questions. For every WRONG answer FIVE SECONDS will be SUBTRACTED from your current time. Your SCORE will be the TIME LEFT when all questions are answered, if you do not complete the quiz in time you will recieve a score of 0.
 
-Click the answer you think is right, once clicked you cannot change your answer and it will display if it is correct or incorrect. 
+Click the answer you think is right. After click, you cannot change your answer and it will display if your choice is correct or incorrect. 
 
-At the end of the quiz you can save you score along with your intials.
+At the end of the quiz you can save you score along with your initials.
 
+You can view you previous scores by clicking the "highscores in the top right corner" 
 
+You can return home from the highscore page by clicking the button in the top middle label "Go back to Start Page" 
 ## CREDITS 
-
+setTimeout() - https://developer.mozilla.org/en-US/docs/Web/API/setTimeout
+setInterval/clear interval - in class activity with the UofMN coding bootcamp.
+forEach () - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
 ## CONTRIBUTIONS  
 MADE WITH 💜 BY MAKAYLA WILSON
