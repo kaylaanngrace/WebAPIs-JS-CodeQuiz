@@ -137,6 +137,7 @@ function startQuiz(){
     questionsAnwersEl.removeAttribute("class", "hidden");
 
     countdown();
+    viewQuestions();
 };
 
 function viewQuestions(){
@@ -144,11 +145,48 @@ function viewQuestions(){
 
     var questionEl = document.getElementById("question");
     questionEl.textContent = currentQuestion.question;
-    answersEL
+    answersEl.innerHTML = "";
+
+    currentQuestion.answers.forEach(function(answer, i) {
+        // create buttons for answers
+        var selectAnswer = document.createElement("button");
+        selectAnswer.setAttribute("class", "btn");
+        selectAnswer.setAttribute("value", answer);
+    
+        selectAnswer.textContent = i + 1 + ". " + answer;
+    
+        selectAnswer.onclick = selectAnswers;
+
+        answersEl.appendChild(selectAnswer);
+    });
+
 };
 
-function selectAnswer(){
+function selectAnswers(){
+    if (this.value !== questions[currentQuestionIndex].correct) {
+        // penalize time
+        time -= 2;
+        btn.addClass("incorrect")
     
+        if (time < 0) {
+          time = 0;
+        }
+        // display new time
+        timerEl.textContent = time;
+        btn.addClass("correct")
+      } else {
+
+      }
+    
+      // next question
+      currentQuestionIndex++;
+    
+      // time checker
+      if (currentQuestionIndex === questions.length) {
+        endQuiz();
+      } else {
+        viewQuestions();
+      }
 };
 
 function endQuiz(){
