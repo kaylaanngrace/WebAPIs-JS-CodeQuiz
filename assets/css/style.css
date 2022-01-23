@@ -15,12 +15,14 @@ header {
     justify-content: space-between;
 }
 
-.highscore a {
+.highscore button {
     color: var(--tertiary-color); 
-    text-decoration: none;  
+    border: none;
+    background-color: white;
+
 }
 
-.highscore a:hover {
+.highscore button:hover {
     color: white;
     background-color: var(--tertiary-color);
     border-radius: 7px;
@@ -68,4 +70,10 @@ header {
 
 .hidden {
     display: none;
+}
+
+.highscoresPage {
+    display: flex;
+    flex-direction: column;
+
 }

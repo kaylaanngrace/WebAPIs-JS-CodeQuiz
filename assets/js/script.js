@@ -6,7 +6,7 @@ var endQuizEl = document.querySelector("#quiz-end");
 var correctIncorrectEl = document.querySelector("#correctIncorrect");
 var initialsEl = document.querySelector("#initals");
 var scoreEl = document.querySelector("#score")
-var highscoresEl = document.querySelector("#highscore")
+var highscoresPageEl = document.querySelector("#highscoresPage")
 var submitButton = document.querySelector("#submit")
 var questions = [
     {
@@ -17,7 +17,7 @@ var questions = [
             "<header>",
             "<section>"
         ],
-        correct: "body"
+        correct: "<body>"
     },
     
     {
@@ -117,18 +117,10 @@ var questions = [
         correct: "all of the above"
     }
 ]
+var highscoreButton = document.querySelector("#highscorebtn")
 
-var timeLeft = 10;
-var timeInterval = setInterval(function () {
-    if (timeLeft > 1) {
-    timerEl.innerHTML = timeLeft;
-    timeLeft--;
-    } else {
-    timerEl.innerHTML = '';
-    clearInterval(timeInterval);
-    endQuiz();
-    }
-}, 1000);
+var timeLeft = 90;
+var timeInterval;
 
 // start button event listner
 startButton.addEventListener('click', startQuiz)
@@ -142,8 +134,18 @@ function startQuiz(){
     // display questions section
     questionsAnwersEl.removeAttribute("class", "hidden");
 
-    // call timer
-    timeInterval
+    // TIMER
+    timeInterval = setInterval(function () {
+        if (timeLeft > 1) {
+        timerEl.innerHTML = timeLeft;
+        timeLeft--;
+        }
+        else {
+        timerEl.innerHTML = '';
+        clearInterval(timeInterval);
+        endQuiz();
+        }
+    }, 1000);
     // call questions
     viewQuestions();
 };
@@ -176,15 +178,16 @@ function viewQuestions(){
 
 // display answers
 function selectAnswers(){
-    if (this !==questions[currentQuestionIndex].correct) {
+    if (questions[currentQuestionIndex].correct !== this.value) {
+        timeLeft -= 5
    // correct or Incorrect styling and text
-    correctIncorrectEl.textContent = "Incorrect!";
-    correctIncorrectEl.style.color = "red";
-    correctIncorrectEl.style.fontSize = "32px";
+        correctIncorrectEl.textContent = "Incorrect!";
+        correctIncorrectEl.style.color = "red";
+        correctIncorrectEl.style.fontSize = "32px";
     } else {
-    correctIncorrectEl.textContent = "Correct!";
-    correctIncorrectEl.style.color = "#42f042";
-    correctIncorrectEl.style.fontSize = "32px";
+        correctIncorrectEl.textContent = "Correct!";
+        correctIncorrectEl.style.color = "#42f042";
+        correctIncorrectEl.style.fontSize = "32px";
     }
 
     // display correct or incorrect
@@ -203,30 +206,53 @@ function selectAnswers(){
     }
 };
 
+// end of quiz
 function endQuiz(){
+    // stop timer
     clearInterval(timeInterval)
+    // if there's time left that becomes the score
+    if (timeLeft > 1) {
+        scoreEl.textContent = timeLeft
+    // if there's no time left they get a score of 0
+    } else {
+        scoreEl.textContent = 0
+    }
     questionsAnwersEl.setAttribute("class","hidden");
     endQuizEl.removeAttribute("class", "hidden");
     submitButton.addEventListener("click", saveScores)
+
     
 };
 
+// save scores to localStoarge
 function saveScores() {
-    var initials = initialsEl;
 
-    if (initials !== "") {
-        // grab from localStorage
-        var highscores =
-        JSON.parse(window.localStorage.getItem("highscores")) || [];
+}
 
-        // new score
-        var newScore = {
-        score: timeInterval,
-        initials: initials
-        };
+// event listener for highscores element
+highscoreButton.addEventListener("click", highscoresPage)
 
-        // save to localstorage
-        highscores.push(newScore);
-        window.localStorage.setItem("highscores", JSON.stringify(highscores))
-    }
+function highscoresPage () {
+    var startEl = document.getElementById("start-home");
+    // hide start, questions and end pages
+    startEl.setAttribute("class","hidden");
+    endQuizEl.setAttribute("class","hidden");
+    questionsAnwersEl.setAttribute("class","hidden")
+    //display highscores page
+    highscoresPageEl.removeAttribute("class", "hidden");
+    // pull from localStorage
+
+
+    // homepage return button
+    var homeButton = document.querySelector(".home")
+    homeButton.addEventListener("click",home)
 };
+
+function home() {
+    highscoresPageEl.setAttribute("class","hidden")
+    // ^hide highscore and display homepage
+    var startEl = document.getElementById("start-home");
+    startEl.removeAttribute("class","hidden");
+
+}
+
