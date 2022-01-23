@@ -1,3 +1,6 @@
+var startButton = document.querySelector("#startBtn")
+var timerEl = document.querySelector("#timer")
+
 var questions = [
     {
         question: "Where is the best place to insert a JavaScript?",
@@ -108,15 +111,30 @@ var questions = [
     }
 ]
 
+var currentQuestion = 0;
+var time = questions.lenght * 9;
+var timerId;
 
-function startGame(){
+function countdown(){
 
 };
 
-function nextQuestions(){
+startButton.addEventListener('click', startQuiz)
+function startQuiz(){
+    var startEl = document.getElementById("start-home");
+    startEl.setAttribute("class","hidden");
+    
+};
+
+function viewQuestions(){
 
 };
 
 function selectAnswer(){
 
 };
+
+
+function saveScores() {
+
+}
