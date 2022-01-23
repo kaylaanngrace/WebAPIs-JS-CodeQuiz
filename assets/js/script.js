@@ -1,5 +1,7 @@
 var startButton = document.querySelector("#startBtn")
 var timerEl = document.querySelector("#timer")
+var questionsAnwersEl = document.querySelector("#questions-answers")
+var endQuizEl = document.querySelector("#quiz-end")
 
 var questions = [
     {
@@ -111,19 +113,29 @@ var questions = [
     }
 ]
 
-var currentQuestion = 0;
-var time = questions.lenght * 9;
-var timerId;
 
-function countdown(){
-
-};
+function countdown() {
+    var timeLeft = 90;
+    var timeInterval = setInterval(function () {
+      if (timeLeft > 1) {
+        timerEl.innerHTML = timeLeft;
+        timeLeft--;
+      } else {
+        timerEl.innerHTML = '';
+        clearInterval(timeInterval);
+        endQuiz();
+      }
+    }, 1000);
+  }
 
 startButton.addEventListener('click', startQuiz)
 function startQuiz(){
     var startEl = document.getElementById("start-home");
     startEl.setAttribute("class","hidden");
-    
+    currentQuestionIndex = 0
+    questionsAnwersEl.removeAttribute("class", "hidden")
+
+    countdown();
 };
 
 function viewQuestions(){
@@ -134,6 +146,9 @@ function selectAnswer(){
 
 };
 
+function endQuiz(){
+    endQuizEl.removeAttribute("class", "hidden")
+}
 
 function saveScores() {
 
